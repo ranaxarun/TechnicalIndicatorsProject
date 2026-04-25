@@ -6,8 +6,8 @@ class flowGraph {
 public:
 
     tbb::flow::graph g;
-    tbb::flow::source_node<int> src
-    tbb::flow::function_node<int, int> fn;
+    tbb::flow::source_node<std::map<int,std::string> src
+    tbb::flow::function_node<std::map<int,std::string, int> fn;
   
     flowGraph();
     void run(int input);
