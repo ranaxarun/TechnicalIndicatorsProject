@@ -10,6 +10,9 @@ struct tickerData {
     double close;
     double low;
     double high;
+    tickerData();
+    tickerData(std::string id,std::string period,double open,double close,double low, double high);
+   
 };
 
 class calculation{
@@ -17,8 +20,8 @@ class calculation{
     tickerData &ticker;
     calculation();
     calculation(tickerData&);
-    double calRSIDaily(ticker&); 
-    double calEMADaily(ticker&); 
+    double calRSIDaily(tickerData&); 
+    double calEMADaily(tickerData&); 
 };
   
 #endif
