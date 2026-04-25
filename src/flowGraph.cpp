@@ -5,7 +5,7 @@
 flowGraph::flowGraph(tbb::flow::graph g ): 
                                         g(g), 
                                         src(g,[]()->std::map<int,std::string>{ return map },false),
-                                        fn(g,[]()->std::int{} )
+                                        fn(g,[](std::map<int,std::string>, int)->std::int{ return 0;} )
 
 {
   
