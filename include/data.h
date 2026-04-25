@@ -3,18 +3,20 @@
 
 #include <string>
 
-
-struct ticker {
+struct tickerData {
     std::string id;
     std::string period;
     double open;
     double close;
     double low;
     double high;
-
-   
-    double calRSIDaily(); 
-    double calEMADaily(); 
 };
 
+class calculation{
+    public:
+    tickerData ticker;
+    double calRSIDaily(ticker&); 
+    double calEMADaily(ticker&); 
+};
+  
 #endif
