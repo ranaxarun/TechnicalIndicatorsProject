@@ -1,13 +1,16 @@
-#include <iostream>
 #include "data.h"
+#include <vector>
+#include <iostream>
 
-int main()
-{
-    tickerData data ("1","14",12,78,87,65);
-    
-    calculation c (data);
-    
-    std::cout<<"Hello World";
+int main() {
+    tickerData t;
+    calculation calc(t);
 
-    return 0;
+    std::vector<double> closes = {100,102,101,103,105,104,106,108,110};
+
+    double rsi = calc.calRSIDaily(closes);
+    double ema = calc.calEMADaily(closes);
+
+    std::cout << "RSI = " << rsi << "\n";
+    std::cout << "EMA = " << ema << "\n";
 }
