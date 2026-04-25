@@ -14,7 +14,7 @@ struct tickerData {
 
 class calculation{
     public:
-    tickerData ticker;
+    tickerData &ticker;
     calculation();
     calculation(tickerData&);
     double calRSIDaily(ticker&); 
