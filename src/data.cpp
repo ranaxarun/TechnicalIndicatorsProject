@@ -1,5 +1,6 @@
 #include<data.h>
-
+#include<iostream>
+#include<string>
 
 data::data(tickerData stockInfo&):ticker(stockInfo){
 }
