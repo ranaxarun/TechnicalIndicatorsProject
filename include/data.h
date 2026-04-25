@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include <string>
+#include <vector>
 
 struct tickerData {
     std::string id;
@@ -10,18 +11,18 @@ struct tickerData {
     double close;
     double low;
     double high;
+
     tickerData();
-    tickerData(std::string id,std::string period,double open,double close,double low, double high);
-   
 };
 
-class calculation{
-    public:
+class calculation {
+public:
     tickerData &ticker;
-    calculation();
-    calculation(tickerData&);
-    double calRSIDaily(tickerData&); 
-    double calEMADaily(tickerData&); 
+
+    calculation(tickerData &);
+    
+    double calRSIDaily(const std::vector<double> &closes, int period = 14);
+    double calEMADaily(const std::vector<double> &closes, int period = 14);
 };
-  
+
 #endif
