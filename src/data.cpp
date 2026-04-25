@@ -2,15 +2,19 @@
 #include<iostream>
 #include<string>
 
-data::data(tickerData stockInfo&):ticker(stockInfo){
+tickerData::tickerData(){}
+
+calculation::calculation(){}
+
+calculation::calculation(tickerData stockInfo&):ticker(stockInfo){
 }
 
-double data::calRSIDaily(tickerData stockInfo&)
+double calculation::calRSIDaily(tickerData stockInfo&)
 {
 
 }
 
-double data::calEMADaily(tickerData stockInfo&)
+double calculation::calEMADaily(tickerData stockInfo&)
 {
 
 }
