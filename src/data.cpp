@@ -1,26 +1,70 @@
 #include "data.h"
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <cmath>
 
-//tickerData::tickerData(){}
+tickerData::tickerData() {}
 
-tickerData:: tickerData(std::string id,std::string period,double open,double close,double low, double high):
-    id(id),period(period),open(open),close(close),low(low),high(high){}
+calculation::calculation(tickerData &stockInfo)
+    : ticker(stockInfo) {}
 
-//calculation::calculation(){}
-
-calculation::calculation(tickerData &stockInfo):ticker(stockInfo)
+// -------------------------
+// RSI CALCULATION
+// -------------------------
+double calculation::calRSIDaily(const std::vector<double> &closes, int period)
 {
+    if (closes.size() <= period)
+        return 0.0;
+
+    double gain = 0.0, loss = 0.0;
+
+    // First average gain/loss
+    for (int i = 1; i <= period; i++) {
+        double diff = closes[i] - closes[i - 1];
+        if (diff >= 0)
+            gain += diff;
+        else
+            loss -= diff;
+    }
+
+    gain /= period;
+    loss /= period;
+
+    // Wilder smoothing
+    for (size_t i = period + 1; i < closes.size(); i++) {
+        double diff = closes[i] - closes[i - 1];
+        double g = diff > 0 ? diff : 0;
+        double l = diff < 0 ? -diff : 0;
+
+        gain = (gain * (period - 1) + g) / period;
+        loss = (loss * (period - 1) + l) / period;
+    }
+
+    if (loss == 0)
+        return 100.0;
+
+    double rs = gain / loss;
+    return 100.0 - (100.0 / (1.0 + rs));
 }
 
-double calculation::calRSIDaily(tickerData &stockInfo)
+// -------------------------
+// EMA CALCULATION
+// -------------------------
+double calculation::calEMADaily(const std::vector<double> &closes, int period)
 {
- std::cout<<"RSI logic to be added";
- return 0.0 ;// this will change after the logic
-}
+    if (closes.size() < period)
+        return 0.0;
 
-double calculation::calEMADaily(tickerData &stockInfo)
-{
-   std::cout<<"EMA logic to be added";
-    return 0.0 ;// this will change after the logic
+    double multiplier = 2.0 / (period + 1);
+    double ema = 0.0;
+
+    // First SMA
+    for (int i = 0; i < period; i++)
+        ema += closes[i];
+    ema /= period;
+
+    // EMA smoothing
+    for (size_t i = period; i < closes.size(); i++)
+        ema = (closes[i] - ema) * multiplier + ema;
+
+    return ema;
 }
