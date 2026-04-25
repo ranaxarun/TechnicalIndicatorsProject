@@ -1,7 +1,6 @@
 #pragma once
 #include <tbb/flow_graph.h>
 
-using namespace tbb::flow;
 
 class flowGraph {
 public:
